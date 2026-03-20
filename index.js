@@ -52,5 +52,5 @@ async function obtenerPais(nombre) {
   console.log("Región:", pais.region || "N/A");
   console.log("Población:", pais.population);
 }
-
+//push prueba
 obtenerPais("Argentina");
