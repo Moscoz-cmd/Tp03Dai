@@ -1,0 +1,24 @@
+{
+  "name": "tp03-juanma-e-ivo",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/Moscoz-cmd/Tp03Dai#readme",
+  "bugs": {
+    "url": "https://github.com/Moscoz-cmd/Tp03Dai/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Moscoz-cmd/Tp03Dai.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "fs": "^0.0.1-security"
+  }
+}
