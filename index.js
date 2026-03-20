@@ -36,3 +36,21 @@ function mostrarFechaHora() {
 }
 
 mostrarFechaHora();
+//Async es para esperar cosas (como el internet)
+async function obtenerPais(nombre) {
+  const url = `https://restcountries.com/v3.1/name/${encodeURIComponent(
+    nombre
+  )}`;
+  
+//await espera respuesta para que fetch la consiga y que se convierta a json
+  const data = await (await fetch(url)).json();
+  const pais = data[0];
+  
+
+  console.log("País:", pais.name.common);
+  console.log("Capital:", pais.capital?.[0] || "N/A");
+  console.log("Región:", pais.region || "N/A");
+  console.log("Población:", pais.population);
+}
+
+obtenerPais("Argentina");
