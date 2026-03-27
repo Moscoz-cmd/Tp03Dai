@@ -118,5 +118,20 @@
     "id": 24,
     "nombre": "Monitor 32 pulgadas",
     "precio": 380000
+  },
+  {
+    "id": 25,
+    "nombre": "Mouse",
+    "precio": 12000
+  },
+  {
+    "id": 26,
+    "nombre": "Mouse",
+    "precio": 12000
+  },
+  {
+    "id": 27,
+    "nombre": "Mouse",
+    "precio": 12000
   }
 ]

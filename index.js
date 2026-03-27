@@ -19,7 +19,7 @@ function agregarProducto(nombre, precio)
     fs.writeFileSync("productos.json", JSON.stringify(productos, null, 2), "utf8");
     console.log("Guardado con exito");
 }
-//agregarProducto("Mouse",12000);
+agregarProducto("Mouse",12000);
 
 //3. Uso de librerias externas
 
@@ -54,3 +54,58 @@ async function obtenerPais(nombre) {
 }
 //push prueba ivo
 obtenerPais("Argentina");
+ //Ejercicio 5 Buscador de productos
+// Esta función busca un producto por nombre en el archivo productos.json
+function buscarProducto(nombre) {
+  // Leemos el archivo productos.json como texto
+  const texto = fs.readFileSync("productos.json", "utf8");
+  // Convertimos el texto a un array de productos (un array de objetos)
+  const productos = JSON.parse(texto);
+
+  // Buscamos el producto cuyo nombre coincida (ignora mayúsculas/minúsculas)
+  // find() devuelve el primer elemento que cumpla la condición
+  const producto = productos.find(
+    (p) => p.nombre.toLowerCase() === nombre.toLowerCase()
+  );
+
+  // Si se encontró el producto, mostramos la información. Si no, mostramos que no se encontró.
+  if (producto) {
+    console.log("Producto encontrado");
+    console.log("Nombre:", producto.nombre);
+    console.log("Precio:", producto.precio);
+  } else {
+    console.log("Producto no encontrado");
+  }
+}
+
+// Ejemplo para probar la función:
+buscarProducto("Mouse");
+
+//Ejercicio 6  Generador de archivo CSV
+// Esta función genera un archivo CSV a partir del archivo productos.json
+function generarCSV() {
+  // Leemos el archivo productos.json como texto
+  const texto = fs.readFileSync("productos.json", "utf8");
+  // Convertimos el texto a un array de productos (un array de objetos)
+  const productos = JSON.parse(texto);
+
+  // Comenzamos el CSV con los encabezados
+  let csv = "nombre,precio\n";
+
+  // Por cada producto, agregamos una línea al CSV
+  productos.forEach((producto) => {
+    // Agregamos el nombre y el precio separados por coma
+    csv += `${producto.nombre},${producto.precio}\n`;
+  });
+
+  // Escribimos el archivo productos.csv con el contenido generado
+  fs.writeFileSync("productos.csv", csv, "utf8");
+
+  // Mostramos mensaje de éxito
+  console.log("Archivo productos.csv generado con éxito.");
+}
+
+// Ejemplo para probar la función:
+generarCSV();
+
+//Ejercicio 7  Temporizador programado
