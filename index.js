@@ -55,20 +55,19 @@ async function obtenerPais(nombre) {
 //push prueba ivo
 obtenerPais("Argentina");
  //Ejercicio 5 Buscador de productos
-// Esta función busca un producto por nombre en el archivo productos.json
+
 function buscarProducto(nombre) {
-  // Leemos el archivo productos.json como texto
+ 
   const texto = fs.readFileSync("productos.json", "utf8");
-  // Convertimos el texto a un array de productos (un array de objetos)
+
   const productos = JSON.parse(texto);
 
-  // Buscamos el producto cuyo nombre coincida (ignora mayúsculas/minúsculas)
-  // find() devuelve el primer elemento que cumpla la condición
+  
   const producto = productos.find(
     (p) => p.nombre.toLowerCase() === nombre.toLowerCase()
   );
 
-  // Si se encontró el producto, mostramos la información. Si no, mostramos que no se encontró.
+
   if (producto) {
     console.log("Producto encontrado");
     console.log("Nombre:", producto.nombre);
@@ -78,34 +77,98 @@ function buscarProducto(nombre) {
   }
 }
 
-// Ejemplo para probar la función:
+
 buscarProducto("Mouse");
 
 //Ejercicio 6  Generador de archivo CSV
 // Esta función genera un archivo CSV a partir del archivo productos.json
 function generarCSV() {
-  // Leemos el archivo productos.json como texto
+  
   const texto = fs.readFileSync("productos.json", "utf8");
-  // Convertimos el texto a un array de productos (un array de objetos)
   const productos = JSON.parse(texto);
-
-  // Comenzamos el CSV con los encabezados
+  // Comenzamos el CSV 
   let csv = "nombre,precio\n";
 
-  // Por cada producto, agregamos una línea al CSV
   productos.forEach((producto) => {
-    // Agregamos el nombre y el precio separados por coma
     csv += `${producto.nombre},${producto.precio}\n`;
   });
 
-  // Escribimos el archivo productos.csv con el contenido generado
   fs.writeFileSync("productos.csv", csv, "utf8");
-
-  // Mostramos mensaje de éxito
   console.log("Archivo productos.csv generado con éxito.");
 }
-
-// Ejemplo para probar la función:
 generarCSV();
 
 //Ejercicio 7  Temporizador programado
+function contador() {
+  let numero = 1; 
+
+  const intervalo = setInterval(() => {
+    console.log(numero); 
+
+    if (numero === 10) {
+      clearInterval(intervalo); 
+
+      setTimeout(() => {
+        console.log("Fin del contador");
+      }, 500); 
+    }
+
+    numero++; 
+  }, 1000); 
+}
+
+contador();
+
+//Ejercicio 8 Analizador de texto
+function analizarTexto(texto) {
+
+  const caracteres = texto.length;
+  const palabras = texto.trim().split(/\s+/).filter(Boolean).length;
+
+  let vocales = 0;
+  let consonantes = 0;
+  const vocalesRegex = /[aeiouáéíóúüAEIOUÁÉÍÓÚÜ]/;
+  const letrasRegex = /[a-zA-ZáéíóúüÁÉÍÓÚÜ]/;
+
+  for (let i = 0; i < texto.length; i++) {
+    const char = texto[i];
+    if (letrasRegex.test(char)) {
+      if (vocalesRegex.test(char)) {
+        vocales++;
+      } else {
+        consonantes++;
+      }
+    }
+  }
+
+  return {
+    caracteres: caracteres,
+    palabras: palabras,
+    vocales: vocales,
+    consonantes: consonantes
+  };
+}
+
+console.log(analizarTexto("Hola mundo"));
+
+//Ejercicio 9 Validador de contraseña
+function validarPassword(password) {
+  const tieneLongitud = password.length >= 8;
+  const tieneNumero = /\d/.test(password);
+  const tieneMayuscula = /[A-ZÁÉÍÓÚÜ]/.test(password);
+
+  if (tieneLongitud && tieneNumero && tieneMayuscula) {
+    console.log("Password válida");
+    return true;
+  } else {
+    console.log("Password inválida");
+    return false;
+  }
+}
+
+// Ejemplo para probar la función:
+validarPassword("Hola1234"); // válida
+validarPassword("holamundo"); // inválida
+validarPassword("HOLAMUNDO"); // inválida
+validarPassword("hola123456"); // inválida
+validarPassword("Hola123"); // inválida
